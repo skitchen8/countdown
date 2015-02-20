@@ -1,0 +1,170 @@
+{  
+   "ksc":{  
+      "times":{  
+         "gmt":1424348565,
+         "local":1424334165,
+         "windowOpens":1424301000,
+         "expected":1424315400,
+         "custom":[  
+
+         ]
+      },
+      "tz":"EST",
+      "hold":"000:00",
+      "vehicle":"DELTA IV",
+      "spacecraft":"TEST-1",
+      "events":[  
+         {  
+            "label":"LIFTOFF",
+            "time":""
+         },
+         {  
+            "label":"5 MIN INTO PLUS CT",
+            "time":""
+         },
+         {  
+            "label":"10 MIN INTO PLUS CT",
+            "time":"00:00:01"
+         },
+         {  
+            "label":"10 MIN INTO PLUS CT",
+            "time":"00:05:01"
+         },
+         {  
+            "label":"10 MIN INTO PLUS CT",
+            "time":"00:10:00"
+         },
+         {  
+            "label":"CLOSE ALL SDO RPCS",
+            "time":"00:40:00"
+         },
+         {  
+            "label":"CMD RCS VALVES",
+            "time":"00:40:00"
+         },
+         {  
+            "label":"15 MIN BIH",
+            "time":"00:19:00"
+         },
+         {  
+            "label":"LM INT STATUS POLL",
+            "time":"00:15:00"
+         },
+         {  
+            "label":"DISABLE EGSE FDIR",
+            "time":"00:15:00"
+         }
+      ],
+      "generated":1424254248,
+      "raw":{  
+         "GMTTSTRG01":"",
+         "LOCLSTRG02":"",
+         "LOCTSTRG03":"",
+         "BIHTSTRG04":"",
+         "WTRTSTRG05":"",
+         "WOTTSTRG06":"",
+         "ELOTSTRG07":"",
+         "ALOLSTRG08":"",
+         "ALOTSTRG09":"",
+         "LTMLSTRG10":"",
+         "LTMTSTRG11":"",
+         "TTMLSTRG12":"",
+         "TTMTSTRG13":"",
+         "RSMLSTRG14":"",
+         "RSMTSTRG15":"",
+         "VHCLSTRG16":"",
+         "SPCFSTRG17":"",
+         "L_M-LBL000":"",
+         "WEBMESSAGE":"",
+         "L_M-TIME00":"",
+         "EVENTLBL01":"",
+         "EVENTTIM01":"",
+         "EVENTLBL02":"",
+         "EVENTTIM02":"",
+         "EVENTLBL03":"",
+         "EVENTTIM03":"",
+         "EVENTLBL04":"",
+         "EVENTTIM04":"",
+         "EVENTLBL05":"",
+         "EVENTTIM05":"",
+         "EVENTLBL06":"",
+         "EVENTTIM06":"",
+         "EVENTLBL07":"",
+         "EVENTTIM07":"",
+         "EVENTLBL08":"",
+         "EVENTTIM08":"",
+         "EVENTLBL09":"",
+         "EVENTTIM09":"",
+         "EVENTLBL10":"",
+         "EVENTTIM10":"",
+         "CNT_FLT_MD":"",
+         "CUREVNTBOX":"",
+         "CURENTBLNK":""
+      }
+   },
+   "vafb":{  
+      "times":{  
+         "gmt":null,
+         "local":null,
+         "windowOpens":null,
+         "expected":null,
+         "custom":[  
+
+         ]
+      },
+      "tz":null,
+      "hold":null,
+      "vehicle":null,
+      "spacecraft":null,
+      "events":[  
+
+      ],
+      "generated":1424395739,
+      "raw":{  
+         "GMTTSTRG01":"",
+         "LOCLSTRG02":"",
+         "LOCTSTRG03":"",
+         "BIHTSTRG04":"",
+         "WTRTSTRG05":"",
+         "WOTTSTRG06":"",
+         "ELOTSTRG07":"",
+         "ALOLSTRG08":"",
+         "ALOTSTRG09":"",
+         "LTMLSTRG10":"",
+         "LTMTSTRG11":"",
+         "TTMLSTRG12":"",
+         "TTMTSTRG13":"",
+         "RSMLSTRG14":"",
+         "RSMTSTRG15":"",
+         "VHCLSTRG16":"",
+         "SPCFSTRG17":"",
+         "L_M-LBL000":"",
+         "WEBMESSAGE":"",
+         "L_M-TIME00":"",
+         "EVENTLBL01":"",
+         "EVENTTIM01":"",
+         "EVENTLBL02":"",
+         "EVENTTIM02":"",
+         "EVENTLBL03":"",
+         "EVENTTIM03":"",
+         "EVENTLBL04":"",
+         "EVENTTIM04":"",
+         "EVENTLBL05":"",
+         "EVENTTIM05":"",
+         "EVENTLBL06":"",
+         "EVENTTIM06":"",
+         "EVENTLBL07":"",
+         "EVENTTIM07":"",
+         "EVENTLBL08":"",
+         "EVENTTIM08":"",
+         "EVENTLBL09":"",
+         "EVENTTIM09":"",
+         "EVENTLBL10":"",
+         "EVENTTIM10":"",
+         "CNT_FLT_MD":"",
+         "CUREVNTBOX":"",
+         "CURENTBLNK":""
+      }
+   }
+}
+
