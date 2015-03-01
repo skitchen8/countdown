@@ -10,6 +10,7 @@ parseData(data);
 
 function parseData(Jdata) {
 	//console.log(Jdata);
+    if (Jdata.ksc.vehicle) {
 	console.log(Jdata.ksc.vehicle + " - " + Jdata.ksc.spacecraft);
 	document.getElementById("launchVehicle").innerHTML = "Launch Vehicle: " + Jdata.ksc.vehicle + " Spacecraft: " + Jdata.ksc.spacecraft;
 	var expectedTime = timeReadable(Jdata.ksc.times.expected);
@@ -38,6 +39,12 @@ function parseData(Jdata) {
 	document.getElementById("EVENTTIM09").innerHTML = Jdata.ksc.events[8].time;
 	document.getElementById("EVENTLB10").innerHTML = Jdata.ksc.events[9].label;
 	document.getElementById("EVENTTIM10").innerHTML = Jdata.ksc.events[9].time;
+    } else {
+        document.getElementById("launchVehicle").innerHTML = "No data available. Will refresh every 60 seconds and re-attempt";
+        setTimeout(function(){
+            window.location.reload(1);
+        }, 60000);
+    }
 }
 
 function timeReadable(toConvert) {

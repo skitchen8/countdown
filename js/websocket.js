@@ -10,23 +10,23 @@ ws.onopen = function(event) { //fires upon successful connection
 	socketStatus.innerHTML = 'Connected to Server';//'Connected to: ' + event.currentTarget.url; 
 	socketStatus.className = 'open';
 	console.log("Connection Open"); //debug: show connection open
-}
+};
 
 ws.onclose = function(event) {	
 	console.log("Connection Closed"); //debug: onclose has been called
 	console.log("ReadyState:" + ws.readyState); //debug: show state
 	//ReadyState = 0-not established, 1-established, 2-closing handshack (not relevant)
 	//3-connection closed (or could not be opened)
-	socketStatus.innerHTML = 'Disconnected from Websocket. Please Refresh to reconnect.'; 
+	socketStatus.innerHTML = 'Disconnected from Websocket.'; 
 	//cannot get reconnect to work, possible refresh button?
 	socketStatus.className = 'closed';
 	closeLink.innerHTML = ''; //kill close connection link (already closed)
-	dataDiv.innerHTML = ''; //Prevent data view from showing old info
-}
+	//dataDiv.innerHTML = ''; //Prevent data view from showing old info, NO LONGER NEDED
+};
 
 ws.onmessage = function (event) { //websocket listener, fires on new data
 	var nondata = event.data; //raw JSON data, remove
-	console.log(nondata); //show raw JSON in console
+	//console.log(nondata); //show raw JSON in console
 	var data = JSON.parse(event.data); //to get data: data.[fieldname].[fieldname]
 	//console.log(data); //show parsed JSON in console
 	parseData(data);	
@@ -38,10 +38,10 @@ function closeSocket() {
 	socketStatus.className = 'closing';
 	console.log("Connection Closing"); //debug: closing (actual close event fires after)
 	return false;
-}
+};
 
 function parseData(Jdata) {
-	//console.log(Jdata);
+    if (Jdata.ksc.vehicle) {
 	console.log(Jdata.ksc.vehicle + " - " + Jdata.ksc.spacecraft);
 	document.getElementById("launchVehicle").innerHTML = "Launch Vehicle: " + Jdata.ksc.vehicle + " Spacecraft: " + Jdata.ksc.spacecraft;
 	var expectedTime = timeReadable(Jdata.ksc.times.expected);
@@ -70,6 +70,14 @@ function parseData(Jdata) {
 	document.getElementById("EVENTTIM09").innerHTML = Jdata.ksc.events[8].time;
 	document.getElementById("EVENTLB10").innerHTML = Jdata.ksc.events[9].label;
 	document.getElementById("EVENTTIM10").innerHTML = Jdata.ksc.events[9].time;
+    } else {
+        document.getElementById("launchVehicle").innerHTML = "No data available. Will refresh every 60 seconds and re-attempt";
+        console.log("No data, auto-refresh in 60 seconds");
+        ws.close();
+        setTimeout(function(){
+            window.location.reload(1);
+        }, 60000);
+    }
 }
 
 function timeReadable(toConvert) {
