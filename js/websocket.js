@@ -37,20 +37,26 @@ function closeSocket() {
 	socketStatus.innerHTML = 'Disconnecting from Websocket.';
 	socketStatus.className = 'closing';
 	console.log("Connection Closing"); //debug: closing (actual close event fires after)
-	return false;
+        
+    return false;
 };
 
 function parseData(Jdata) {
-    if (Jdata.ksc.vehicle) {
-	console.log(Jdata.ksc.vehicle + " - " + Jdata.ksc.spacecraft);
+    if (Jdata.ksc.times.expected) {
+	//console.log(Jdata.ksc.vehicle + " - " + Jdata.ksc.spacecraft);
 	document.getElementById("launchVehicle").innerHTML = "Launch Vehicle: " + Jdata.ksc.vehicle + " Spacecraft: " + Jdata.ksc.spacecraft;
-	var expectedTime = timeReadable(Jdata.ksc.times.expected);
-	console.log(Jdata.ksc.times.expected);
-	document.getElementById("expectedLaunch").innerHTML = "Expected Launch: " + expectedTime + " " + Jdata.ksc.tz;
+        var expectedTime = Jdata.ksc.times.expected;
+	document.getElementById("expectedLaunch").innerHTML = "Expected Launch: " + timeReadable(expectedTime) + " " + Jdata.ksc.tz;
 	document.getElementById("updateTime").innerHTML = "Updated At: " + timeReadable(Jdata.ksc.generated) + " " + Jdata.ksc.tz;
 	document.getElementById("windowOpen").innerHTML = "Window Opens: " + timeReadable(Jdata.ksc.times.windowOpens) + " " + Jdata.ksc.tz;
-	//WOTTSTRG06 = Window Time Remaining - hh:mm:ss (for calculating window length/window close) (Jdata.ksc.raw.WOTTSTRG05);
-	document.getElementById("EVENTLB01").innerHTML = Jdata.ksc.events[0].label;
+	document.getElementById("windowClose").innerHTML = "Window Closes: " + timeReadable(Jdata.ksc.times.custom[0].time) + " " + Jdata.ksc.tz;
+        var tMinus = expectedTime - Jdata.ksc.generated;
+        var converted = convertTMinus(tMinus);
+        //console.log("Converted: " + converted);
+        document.getElementById("tMinus").innerHTML = "T- (HH:MM:SS): <b>" + converted + "</b>";
+        document.title = "T- " + converted;
+        //console.log("T-: " + tMinus);
+        document.getElementById("EVENTLB01").innerHTML = Jdata.ksc.events[0].label;
 	document.getElementById("EVENTTIM01").innerHTML = Jdata.ksc.events[0].time;
 	document.getElementById("EVENTLB02").innerHTML = Jdata.ksc.events[1].label;
 	document.getElementById("EVENTTIM02").innerHTML = Jdata.ksc.events[1].time;	
@@ -73,6 +79,7 @@ function parseData(Jdata) {
     } else {
         document.getElementById("launchVehicle").innerHTML = "No data available. Will refresh every 60 seconds and re-attempt";
         console.log("No data, auto-refresh in 60 seconds");
+        document.title = "No Data (Will Refresh)";
         ws.close();
         setTimeout(function(){
             window.location.reload(1);
@@ -88,6 +95,19 @@ function timeReadable(toConvert) {
 	var month = date.getMonth() + 1;
 	var day = date.getDate();
 	var year = date.getFullYear();
-	var readable = month + "/" + day + "/" + year + " " + hours + ":" + minutes + ":" + seconds;
+	var readable = padNumber(month) + "/" + padNumber(day) + "/" + padNumber(year) + " " + padNumber(hours) + ":" + padNumber(minutes) + ":" + padNumber(seconds);
 	return readable;
+}
+
+function padNumber(inNumber) {
+    //var s = inNumber + "";
+    var s = inNumber.toString();
+    if (s.length < 2) s = "0" + s;
+    return s;
+}
+
+function convertTMinus(totalSeconds) {
+    var date = new Date(1970,0,1);
+    date.setSeconds(totalSeconds);
+    return date.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
 }
